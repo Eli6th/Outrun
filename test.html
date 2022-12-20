@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Personal Portfolio</title>
+  <style>
+    body {
+        background-color: rgb(113, 113, 113);
+    }
+    .terminal-container {
+    width: 80%;
+    margin: auto;
+    background-color: #333;
+    color: #fff;
+    font-family: monospace;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .terminal-prompt {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  .terminal-title {
+    font-size: 1.5em;
+  }
+  .terminal-body {
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+  ul {
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+  </style>
+</head>
+<body>
+  <div class="terminal-container">
+    <div class="terminal-header">
+      <div class="terminal-prompt">~$</div>
+      <div class="terminal-title">Portfolio</div>
+    </div>
+    <div class="terminal-body">
+      <p>Welcome to my personal portfolio website!</p>
+      <p>Use the menu options below to navigate:</p>
+      <ul>
+        <li>About Me</li>
+        <li>Projects</li>
+        <li>Skills</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+  </div>
+</body>
+<script>
+    // Add event listener to menu items
+  const menuItems = document.querySelectorAll('li');
+  menuItems.forEach(item => {
+    item.addEventListener('click', handleMenuItemClick);
+  });
+
+  // Function to handle menu item click and update terminal body
+  function handleMenuItemClick(e) {
+    const menuItem = e.target.innerText;
+    let content = '';
+
+    if (menuItem === 'About Me') {
+      content = '<p>This is where you would include information about yourself and your background in coding.</p>';
+    } else if (menuItem === 'Projects') {
+      content = '<p>This is where you would include information about your coding projects and links to view them.</p>';
+    } else if (menuItem === 'Skills') {
+      content = '<p>This is where you would include a list of your coding skills and expertise.</p>';
+    } else if (menuItem === 'Contact') {
+      content = '<p>This is where you would include your contact information and a form for potential employers or clients to reach out to you.</p>';
+    }
+
+    // Update terminal body with new content
+    const terminalBody = document.querySelector('.terminal-body');
+    terminalBody.innerHTML = content;
+  }
+</script>
+</html>
