@@ -1,0 +1,96 @@
+:root {
+    --purple: #fc441b;
+    --pink: #fcb51b;
+    --blue: #fc1b62;
+}
+
+body {
+    background-color: #323437;
+    display: grid;
+    height: 100vh;
+    margin: 0px;
+    overflow: hidden;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "PT Sans";
+}
+
+h1 {
+    font-size: 75px;
+    color: white;
+}
+
+.run-effect {
+    animation: background-pan 3s linear infinite;
+    background: linear-gradient(
+        to right,
+        var(--purple),
+        var(--pink),
+        var(--blue),
+        var(--purple)
+    );
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+}
+
+a {
+    transition: padding 0.5s, background 1s;
+
+    width: 200px;
+    font-size: 50px;
+
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #afafaf;
+
+    color: white;
+    -webkit-background-clip: text;
+    white-space: nowrap;
+    text-decoration: none;
+
+    text-align: center;
+}
+
+a:hover {
+    animation: background-pan 3s linear infinite;
+    background: linear-gradient(
+        to right,
+        var(--purple),
+        var(--pink),
+        var(--blue),
+        var(--purple)
+    );
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+
+
+    padding: 15px;
+}
+
+@keyframes intro-animation {
+    from {
+
+    }
+
+    to {
+
+    }
+}
+
+@keyframes background-pan {
+    from {
+        background-position: 0% center;
+    }
+
+    to {
+        background-position: -200% center;
+    }
+}

@@ -71,5 +71,7 @@ export class Player {
         } else if (this.lives > 5) {
             this.lives = 5;
         }
+
+        localStorage.setItem('playerLives', this.lives);
     }
 }

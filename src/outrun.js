@@ -35,6 +35,12 @@ highscore_counter.innerHTML = highscore;
 
 // Creating player
 let player = new Player(50, 50, 10, 10, 1);
+if (localStorage.getItem('playerLives')) {
+    player.lives = parseInt(localStorage.getItem('playerLives'));
+} else {
+    player.lives = 1;
+    localStorage.setItem('playerLives', player.lives);
+}
 new InputHandler(player);
 
 // Game areas
