@@ -68,7 +68,7 @@ var enemies = [];
 
 // Creating the canvas and live game
 let requestID;
-let animating = true;
+let animating = false;
 let last_time = 0;
 function UpdateCanvas(timestamp) {
     if (!animating) {

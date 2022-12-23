@@ -31,3 +31,44 @@ body {
     text-decoration: underline;
     cursor: pointer;
 }
+
+#notification_box {
+    visibility: hidden;
+    position: absolute;
+    width: 350px;
+    height: 50px;
+
+    top: 20px;
+    right: 15px;
+
+    background-color: #afafaf;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    
+    padding: 10px;
+}
+#notification_box.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#notification_box h3 {
+    color: #323437;
+    margin: 0;
+}
+#notification_box p {
+    color: #323437;
+    margin: 0;
+}
+
+@keyframes fadein {
+  from {right: -375px; opacity: 0;}
+  to {right: 15px; opacity: 1;}
+}
+@keyframes fadeout {
+    from {right: 15px; opacity: 1;}
+    to {right: -375px; opacity: 0;}
+}
