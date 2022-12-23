@@ -38,6 +38,13 @@ if (localStorage.getItem('highscore')) {
 var highscore_counter = document.getElementById("highscore_counter");
 highscore_counter.innerHTML = highscore;
 
+if (localStorage.getItem('last_run_score')) {
+    var last_run_score = parseInt(localStorage.getItem('last_run_score'));
+} else {
+    var last_run_score = 1;
+    localStorage.setItem('highscore', highscore);
+}
+
 // Creating player
 let player = new Player(50, 50, 10, 10, 1);
 if (localStorage.getItem('playerLives')) {
@@ -180,6 +187,8 @@ function checkCollisions() {
 
             // Check if player is dead
             if (player.lives <= 0) {
+                last_run_score = level;
+                localStorage.setItem('last_run_score', last_run_score);
                 player.lives = 1;
                 level = 1;
             }

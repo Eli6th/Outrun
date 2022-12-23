@@ -17,9 +17,17 @@ body {
 
 .bottom_banner {
     width: 500px;
-    justify-content: left;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .img-icon {
     background-color: #afafaf;
+}
+
+.share {
+    text-decoration: underline;
+    cursor: pointer;
 }
