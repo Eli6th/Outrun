@@ -20,6 +20,7 @@ export class Player {
 
         this.speed = 15;
         this.is_hidden = true;
+        this.can_move = true;
     }
 
     draw(ctx) {
@@ -28,7 +29,7 @@ export class Player {
     }
 
     update(delta_time) {
-        if (!delta_time) return;
+        if (!delta_time || !this.can_move) return;
 
         // Moving
         if (this.position.x - this.speed / delta_time >= 0 && this.move.right)

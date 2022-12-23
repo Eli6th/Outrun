@@ -1,9 +1,12 @@
 // Imports
 import { StartArea, WinArea } from './areas.js';
+
 import { Player } from './player.js';
 import { InputHandler } from './input.js';
+import { handleParticles, createParticles } from './particles.js';
+
 import { PatrolEnemy, ChaseEnemy } from './enemy.js';
-import { resetLevelAnim } from './animation.js';
+import { resetLevelAnim, screenShake, postShake } from './animation.js';
 
 // Global constants
 const GAME_WIDTH = 500;
@@ -14,6 +17,8 @@ var canvas = document.getElementById("game_panel");
 canvas.width = GAME_WIDTH;
 canvas.height = GAME_HEIGHT;
 var ctx = canvas.getContext("2d");
+
+var death_anim = false;
 
 // Setting HTML elements
 if (localStorage.getItem('level')) {
@@ -47,6 +52,10 @@ new InputHandler(player);
 var win = new WinArea(450, 450, 50, 50);
 var start = new StartArea(35 + player.width / 2, 35 + player.height / 2, 30, 30);
 
+// Creating a holder for particles
+var particles = [];
+particles = createParticles(particles);
+
 // Creating enemies
 var enemies = [];
 
@@ -64,6 +73,13 @@ function UpdateCanvas(timestamp) {
     last_time = timestamp;
 
     ctx.clearRect(0, 0, 800, 600);
+
+    if (death_anim) {
+        // Create a death animation, with a death screen
+        handleParticles(particles, player.position, ctx);
+        screenShake(ctx);
+    }
+
     win.draw(ctx);
     start.draw(ctx);
 
@@ -74,6 +90,10 @@ function UpdateCanvas(timestamp) {
 
     player.update(delta_time);
     player.draw(ctx);
+
+    if (death_anim) {
+        postShake(ctx);
+    }
 
     checkCollisions();
 
@@ -86,7 +106,6 @@ function StartLevel() {
         animating = true;
         requestID = requestAnimationFrame(UpdateCanvas);
     }, 2000);
-    console.log(requestID);
 
     enemies = []
 
@@ -104,19 +123,18 @@ function StartLevel() {
             enemies.push(new PatrolEnemy(RandomNum(max, min), RandomNum(max, min), 10, 10, 0.5, [
                 [RandomNum(max, min), y], 
                 [RandomNum(max, min), y]
-            ]));
+            ], "#FF0000FF"));
         } else {
             let x = RandomNum(max, min);
             enemies.push(new PatrolEnemy(RandomNum(max, min), RandomNum(max, min), 10, 10, 0.5, [
                 [x, RandomNum(max, min)], 
                 [x, RandomNum(max, min)]
-            ]));
-            console.log(enemies.positions);
+            ], "#FF0000FF"));
         }
     }
     // Spawn Border Patrol Enemies every 5 levels
     for (var i = 0; i < parseInt(level / 5); i ++) {
-        enemies.push(new PatrolEnemy(RandomNum(max, min), 100, 10, 10, 1, [[10, 10], [10, 490], [490, 490], [490, 10]]));
+        enemies.push(new PatrolEnemy(RandomNum(max, min), 100, 10, 10, 1, [[10, 10], [10, 490], [490, 490], [490, 10]], "#ff4f23"));
     }
 
     // Update the level counter
@@ -153,13 +171,25 @@ function checkCollisions() {
     // Check for collisions by enemies
     for (var i = 0; i < enemies.length; i++) {
         if (enemies[i].check_collision(player) && !player.is_hidden) {
+            if (death_anim) return;
+
+            death_anim = true;
+
+            player.can_move = false;
             player.update_lives(-1);
+
+            // Check if player is dead
             if (player.lives <= 0) {
                 player.lives = 1;
                 level = 1;
             }
 
-            StartLevel();
+            setTimeout(() => {
+                particles = createParticles(particles);
+                player.can_move = true;
+                StartLevel();
+                death_anim = false;
+            }, 800);
         }
     }
 

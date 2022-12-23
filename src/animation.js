@@ -1,31 +1,3 @@
-var wait = (ms) => {
-    const start = Date.now();
-    let now = start;
-    while (now - start < ms) {
-      now = Date.now();
-    }
-}
-
-// export function resetLevelAnim(ctx) {
-//     ctx.clearRect(0, 0, 800, 600);
-//     ctx.fillStyle = "lightgray";
-//     var position = {
-//         x: 0,
-//         y: 0,
-//     }
-
-//     for (var i = 0; i < 10; i++) {
-//         for (var a = 0; a < 10; a++) {
-//             wait(10);
-//             ctx.fillRect(position.x, position.y, 50, 50);
-//             position.x = position.x + 50;
-//         }
-//         position.y = position.y + 50;
-//     }
-//     // requestAnimationFrame(resetLevelAnim());
-//     wait(500);
-// }
-
 export function resetLevelAnim(ctx, requestID) {
     if (requestID != null) {
         cancelAnimationFrame(requestID);
@@ -72,5 +44,15 @@ export function resetLevelAnim(ctx, requestID) {
   
     // Start the animation
     requestAnimationFrame(update);
-  }
-  
+}
+
+export function screenShake(ctx) {
+    ctx.save();
+    var dx = Math.random()*10;
+    var dy = Math.random()*10;
+    ctx.translate(dx, dy);  
+}
+
+export function postShake(ctx) {
+    ctx.restore();
+}

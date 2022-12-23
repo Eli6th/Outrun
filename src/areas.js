@@ -27,7 +27,7 @@ export class StartArea {
             y: y,
         }
 
-        this.color = "#00ff00";
+        this.color = "#fc1b62";
     }
 
     draw(ctx) {

@@ -1,5 +1,5 @@
 export class PatrolEnemy {
-    constructor (x, y, width, height, speed, positions) {
+    constructor (x, y, width, height, speed, positions, color) {
         this.width = width;
         this.height = height;
 
@@ -10,7 +10,7 @@ export class PatrolEnemy {
             down: false,
         }
 
-        this.color = "#FF0000FF";
+        this.color = color;
 
         this.speed = speed;
 
@@ -24,8 +24,12 @@ export class PatrolEnemy {
     }
 
     draw(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.position.x, this.position.y, 0.5 * this.width, 0, 2 * Math.PI, false);
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        ctx.fill();
+        ctx.strokeStyle = this.color;
+        ctx.stroke();
     }
 
     movement(player_pos) {
@@ -101,8 +105,31 @@ export class ChaseEnemy {
     }
 
     draw(ctx) {
+        var point1 = {
+            x: this.position.x,
+            y: this.position.y + this.height / 2,
+        }
+        var point2 = {
+            x: this.position.x + this.width / 2,
+            y: this.position.y - this.height / 2,
+        }
+        var point3 = {
+            x: this.position.x - this.width / 2,
+            y: this.position.y - this.height / 2,
+        }
+        
+        ctx.strokeStyle = this.color;
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+        ctx.beginPath();
+        ctx.moveTo(point1.x, point1.y);
+        ctx.lineTo(point2.x, point2.y);
+        ctx.lineTo(point3.x, point3.y);
+        ctx.lineTo(point1.x, point1.y);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+        ctx.stroke();
     }
 
     movement(player) {

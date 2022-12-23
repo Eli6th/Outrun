@@ -40,9 +40,11 @@ h1 {
 }
 
 a {
-    transition: padding 0.5s, background 1s;
+    transition: padding 0.5s;
 
-    width: 200px;
+    margin: 10px 0;
+
+    width: 300px;
     font-size: 50px;
 
     padding: 10px;
@@ -73,16 +75,6 @@ a:hover {
 
 
     padding: 15px;
-}
-
-@keyframes intro-animation {
-    from {
-
-    }
-
-    to {
-
-    }
 }
 
 @keyframes background-pan {
