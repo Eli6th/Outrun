@@ -18,7 +18,7 @@ export class Player {
         this.lives = lives;
         this.color = "#FFFFFF";
 
-        this.speed = 15;
+        this.speed = 3;
         this.is_hidden = true;
         this.can_move = true;
     }
@@ -32,23 +32,23 @@ export class Player {
         if (!delta_time || !this.can_move) return;
 
         // Moving
-        if (this.position.x - this.speed / delta_time >= 0 && this.move.right)
-            this.position.x -= this.speed * this.move.right / delta_time;
-        if (this.position.x + this.speed / delta_time <= 500 && this.move.left)
-            this.position.x += this.speed / delta_time;
-        if (this.position.y - this.speed / delta_time > 0 && this.move.up)
-            this.position.y -= this.speed * this.move.up / delta_time;
-        if (this.position.y + this.speed / delta_time <= 500 && this.move.down) 
-            this.position.y += this.speed * this.move.down / delta_time;
+        if (this.position.x - this.speed >= 0 && this.move.right)
+            this.position.x -= this.speed;
+        if (this.position.x + this.speed <= 500 && this.move.left)
+            this.position.x += this.speed;
+        if (this.position.y - this.speed >= 0 && this.move.up)
+            this.position.y -= this.speed;
+        if (this.position.y + this.speed <= 500 && this.move.down) 
+            this.position.y += this.speed;
 
         // Adjusting if player goes out of bounds
-        if (this.position.y < 0 && this.move.up)
+        if (this.position.y - this.speed < 0 && this.move.up)
             this.position.y = 0;
-        if (this.position.y + this.speed > 500 && this.move.down)
+        if (this.position.y + this.speed > 500 - this.width && this.move.down)
             this.position.y = 500 - this.height;
-        if (this.position.x < 0 && this.move.right)
-            this.position.x = 0 + this.width;
-        if (this.position.x + this.speed > 500 && this.move.left)
+        if (this.position.x - this.speed < 0 && this.move.right)
+            this.position.x = 0;
+        if (this.position.x + this.speed > 500 - this.width && this.move.left)
             this.position.x = 500 - this.width;
     }
 
@@ -56,19 +56,19 @@ export class Player {
         this.lives = this.lives + change_num;
         if (this.lives == 1) {
             this.color = "#FFFFFF";
-            this.speed = 15;
+            this.speed = 3;
         } else if (this.lives == 2) {
             this.color = "#9B00FFFF";
-            this.speed = 17;
+            this.speed = 4;
         } else if (this.lives == 3) {
             this.color = "#4200FFFF";
-            this.speed = 20;
+            this.speed = 5;
         } else if (this.lives == 4) {
             this.color = "#0064FFFF";
-            this.speed = 22;
+            this.speed = 6;
         } else if (this.lives == 5) {
             this.color = "#00FDFFFF";
-            this.speed = 25;
+            this.speed = 7;
         } else if (this.lives > 5) {
             this.lives = 5;
         }

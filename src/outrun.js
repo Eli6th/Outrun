@@ -70,13 +70,21 @@ var enemies = [];
 let requestID;
 let animating = false;
 let last_time = 0;
+const FRAMES_PER_SECOND = 60; 
+const FRAME_MIN_TIME = (1000/60) * (60 / FRAMES_PER_SECOND) - (1000/60) * 0.5;
 function UpdateCanvas(timestamp) {
+    let delta_time = timestamp - last_time;
+
+    if(delta_time < FRAME_MIN_TIME){ //skip the frame if the call is too early
+        requestAnimationFrame(UpdateCanvas);
+        return; // return as there is nothing to do
+    }
+
     if (!animating) {
         requestID = requestAnimationFrame(UpdateCanvas);
         return;
     }
 
-    let delta_time = timestamp - last_time;
     last_time = timestamp;
 
     ctx.clearRect(0, 0, 800, 600);
@@ -124,16 +132,16 @@ function StartLevel() {
 
     // Spawn Patrol and Chasing Enemies every 5 levels
     for (var i = 0; i < level; i ++) {
-        enemies.push(new ChaseEnemy(RandomNum(max, min), RandomNum(max, min), 10, 10, 0.2));
+        enemies.push(new ChaseEnemy(RandomNum(max, min), RandomNum(max, min), 10, 10, 1));
         if (RandomNum(2, 0) == 0) {
             let y = RandomNum(max, min);
-            enemies.push(new PatrolEnemy(RandomNum(max, min), RandomNum(max, min), 10, 10, 0.5, [
+            enemies.push(new PatrolEnemy(RandomNum(max, min), RandomNum(max, min), 10, 10, 2.5, [
                 [RandomNum(max, min), y], 
                 [RandomNum(max, min), y]
             ], "#FF0000FF"));
         } else {
             let x = RandomNum(max, min);
-            enemies.push(new PatrolEnemy(RandomNum(max, min), RandomNum(max, min), 10, 10, 0.5, [
+            enemies.push(new PatrolEnemy(RandomNum(max, min), RandomNum(max, min), 10, 10, 2.5, [
                 [x, RandomNum(max, min)], 
                 [x, RandomNum(max, min)]
             ], "#FF0000FF"));
@@ -141,7 +149,7 @@ function StartLevel() {
     }
     // Spawn Border Patrol Enemies every 5 levels
     for (var i = 0; i < parseInt(level / 5); i ++) {
-        enemies.push(new PatrolEnemy(RandomNum(max, min), 100, 10, 10, 1, [[10, 10], [10, 490], [490, 490], [490, 10]], "#ff4f23"));
+        enemies.push(new PatrolEnemy(RandomNum(max, min), 100, 10, 10, 4, [[10, 10], [10, 490], [490, 490], [490, 10]], "#ff4f23"));
     }
 
     // Update the level counter
