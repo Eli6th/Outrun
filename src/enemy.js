@@ -1,5 +1,7 @@
 export class PatrolEnemy {
-    constructor (x, y, width, height, speed, positions, color) {
+    constructor (width, height, speed, patrol_positions, color, turns_to_spawn) {
+        this.turns_to_spawn = turns_to_spawn;
+        
         this.width = width;
         this.height = height;
 
@@ -14,11 +16,40 @@ export class PatrolEnemy {
 
         this.speed = speed;
 
+        this.patrolPositions = patrol_positions;
+
+        this.starting_positions();
+    }
+
+    starting_positions() {
+        var max = 490;
+        var min = 10;
+
         this.position = {
-            x: x,
-            y: y,
+            x: RandomNum(max, min),
+            y: RandomNum(max, min),
         }
-        this.patrolPositions = positions;
+
+        if (this.patrolPositions != null) {
+            this.positionCounter = 0;
+            this.currentPosition = this.patrolPositions[this.positionCounter];
+            return;
+        }
+        
+        if (RandomNum(2, 0) == 0) {
+            let y = RandomNum(max, min);
+            this.patrolPositions = [
+                [RandomNum(max, min), y], 
+                [RandomNum(max, min), y]
+            ]
+        } else {
+            let x = RandomNum(max, min);
+            this.patrolPositions = [
+                [x, RandomNum(max, min)], 
+                [x, RandomNum(max, min)]
+            ]
+        }
+
         this.positionCounter = 0;
         this.currentPosition = this.patrolPositions[this.positionCounter];
     }
@@ -83,7 +114,9 @@ export class PatrolEnemy {
 }
 
 export class ChaseEnemy {
-    constructor (x, y, width, height, speed) {
+    constructor (width, height, speed, color, turns_to_spawn) {
+        this.turns_to_spawn = turns_to_spawn;
+
         this.width = width;
         this.height = height;
 
@@ -94,13 +127,20 @@ export class ChaseEnemy {
             down: false,
         }
 
-        this.color = "#940000FF";
+        this.color = color;
 
         this.speed = speed;
 
+        this.starting_positions();
+    }
+
+    starting_positions() {
+        var max = 490;
+        var min = 10;
+
         this.position = {
-            x: x,
-            y: y,
+            x: RandomNum(max, min),
+            y: RandomNum(max, min),
         }
     }
 
@@ -176,4 +216,8 @@ export class ChaseEnemy {
             return false; // No collision
         }
     }
+}
+
+export function RandomNum(max, min) {
+    return Math.floor(Math.random() * (max - min) ) + min;
 }

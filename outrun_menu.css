@@ -1,16 +1,19 @@
 :root {
-    --purple: #fc441b;
-    --pink: #fcb51b;
-    --blue: #fc1b62;
+    --color_one: #fc441b;
+    --color_two: #fcb51b;
+    --color_three: #fc1b62;
+
+    --background-color-theme: #323437;
+    --normal-text-color-theme: #afafaf;
 }
 
 body {
-    background-color: #323437;
+    background-color: var(--background-color-theme);
     display: grid;
     height: 100vh;
     width: 100vw;
     margin: 0px;
-    overflow: hidden;
+    /* overflow: hidden; */
     
     display: flex;
     flex-direction: column;
@@ -29,10 +32,10 @@ h1 {
     animation: background-pan 3s linear infinite;
     background: linear-gradient(
         to right,
-        var(--purple),
-        var(--pink),
-        var(--blue),
-        var(--purple)
+        var(--color_one),
+        var(--color_two),
+        var(--color_three),
+        var(--color_one)
     );
     background-size: 200%;
     -webkit-background-clip: text;
@@ -50,7 +53,7 @@ a {
 
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid #afafaf;
+    border: 1px solid var(--normal-text-color-theme);
 
     color: white;
     -webkit-background-clip: text;
@@ -64,10 +67,10 @@ a:hover {
     animation: background-pan 3s linear infinite;
     background: linear-gradient(
         to right,
-        var(--purple),
-        var(--pink),
-        var(--blue),
-        var(--purple)
+        var(--color_one),
+        var(--color_two),
+        var(--color_three),
+        var(--color_one)
     );
     background-size: 200%;
     -webkit-background-clip: text;

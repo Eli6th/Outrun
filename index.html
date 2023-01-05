@@ -1,6 +1,8 @@
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Outrun</title>
 
         <!-- Fonts -->
@@ -22,14 +24,27 @@
                 <p>See if your friends can Outrun you</p>
             </div>
 
-            <h1 class="run-effect">Outrun</h1>
+            <!-- <div id="tutorial" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>Some text in the Modal..</p>
+                </div>
+            </div> -->
+
+            <h1 id="big-header" class="run-effect">Outrun</h1>
             <div class="bottom_banner">
-                <p class="level">Highscore: <span id="highscore_counter"></span></p>
-                <!-- <img src="upload.png" width="30px" class="img-icon" /> -->
+                <div class="highscore">
+                    <p class="level">Highscore: <span id="highscore_counter"></span></p>
+                    <p class="level">World: <span id="world_highscore_counter"></span></p>
+                </div>
+                <h1 id="small-header" class="run-effect">Outrun</h1>
             </div>
             <canvas id="game_panel" style="width: 500px; height: 500px;"></canvas>
             <div class="bottom_banner">
-                <p class="level">Level: <span id="level_counter"></span></p>
+                <div class="level_wrapper">
+                    <p class="level">Level: <span id="level_counter"></span></p>
+                    <p class="level">World: <span id="world_counter"></span></p>
+                </div>
                 <div class="share" type="button" onclick="shareScore()"><p>Share last run's score</p></div>
             </div>
         </div>

@@ -2,20 +2,28 @@ h3 {
     color: white;
 }
 
+#big-header {
+    margin: 10px;
+}
+#small-header {
+    display: none;
+    margin: 0;
+}
+
 #game {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    background-color: #323437;
-    color: #afafaf;
+    background-color: var(--background-color-theme);
+    color: var(--normal-text-color-theme);
 
     font-family: "PT Sans";
 }
 
 #game_panel {
-    border: 1px solid #afafaf;
+    border: 1px solid var(--normal-text-color-theme);
 }
 
 .bottom_banner {
@@ -27,7 +35,7 @@ h3 {
 }
 
 .img-icon {
-    background-color: #afafaf;
+    background-color: var(--normal-text-color-theme);
 }
 
 .share {
@@ -44,7 +52,7 @@ h3 {
     top: 20px;
     right: 15px;
 
-    background-color: #afafaf;
+    background-color: var(--normal-text-color-theme);
     border-radius: 10px;
 
     display: flex;
@@ -63,7 +71,7 @@ h3 {
     margin: 0;
 }
 #notification_box p {
-    color: #323437;
+    color: var(--background-color-theme);
     margin: 0;
 }
 
@@ -83,11 +91,20 @@ h3 {
     opacity: 0;
 }
 
-@media screen and (max-width: 600px) {
-    .game {
+@media screen and (max-height: 800px) {
+    #small-header {
+        display: inline;
+    }
+    #big-header {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px), screen and (max-height: 650px) {
+    #game {
         opacity: 0;
     }
-    .sorry {
+    #sorry {
         opacity: 1;
     }
 }

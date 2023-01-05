@@ -1,5 +1,5 @@
 export class WinArea {
-    constructor (x, y, width, height) {
+    constructor (x, y, width, height, primary_color_1) {
         this.width = width;
         this.height = height;
         
@@ -8,7 +8,8 @@ export class WinArea {
             y: y,
         }
 
-        this.color = "#fcba03";
+        this.color = primary_color_1;
+        // "#fcba03";
     }
 
     draw(ctx) {
@@ -18,7 +19,7 @@ export class WinArea {
 }
 
 export class StartArea {
-    constructor (x, y, width, height) {
+    constructor (x, y, width, height, primary_color_2) {
         this.width = width;
         this.height = height;
         
@@ -27,7 +28,8 @@ export class StartArea {
             y: y,
         }
 
-        this.color = "#fc1b62";
+        this.color = primary_color_2;
+        // "#fc1b62";
     }
 
     draw(ctx) {
